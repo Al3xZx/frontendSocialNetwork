@@ -1,4 +1,4 @@
-<div class="card rounded">
+<div class="card">
   <div class="card-header">
       <div class="d-flex justify-content-between align-items-center">
 <!--        <div class="mr-2">-->
@@ -19,7 +19,7 @@
   </div>
 
   <div class="card-footer">
-    <button class="button is-light mr-2" (click)="addLike()">
+    <button class="btn btn-light mt-2" (click)="addLike()">
       <div class="fa fa-gittip mr-2"></div>
       Like {{numLike}}
     </button>
@@ -35,12 +35,12 @@
     <div  id="scrivi-commento">
       <textarea class="textarea"  rows="1" placeholder="Scrivi un commento..." [(ngModel)]="testoNuovoCommento"></textarea>
 
-      <button class="button is-light mt-2 is-disabled" *ngIf="testoNuovoCommento === ''">
+      <div class="btn btn-light mt-2 disabled" *ngIf="testoNuovoCommento === ''">
       <div class="fa fa-comment mr-2"></div>
       Commenta
-      </button>
+      </div>
 
-      <button class="button is-light mt-2" *ngIf="testoNuovoCommento !== ''" (click)="addCommento()">
+      <button class="btn btn-light mt-2" *ngIf="testoNuovoCommento !== ''" (click)="addCommento()">
         <div class="fa fa-comment mr-2"></div>
         Commenta
       </button>

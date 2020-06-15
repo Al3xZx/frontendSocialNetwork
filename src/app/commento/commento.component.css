@@ -1,8 +1,7 @@
 #commento{
-  /*border-radius: 15px 50px;*/
+  border-radius: 15px;
   padding: 5px;
   border: 2px solid lightgray;
-  /*position: center;*/
   width: 550px;
 
 }

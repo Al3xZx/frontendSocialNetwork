@@ -1,10 +1,12 @@
 .card{
   margin: 10px;
+  border-radius: 15px;
 }
 
-.button{
+.btn{
   border-radius: 20px;
   color: dodgerblue;
+  background-color: #F1F1F1;
 }
 
 #scrivi-commento{
@@ -15,4 +17,7 @@
 #commento{
   margin: auto;
   width: 600px;
+}
+.textarea{
+  border-radius: 10px;
 }

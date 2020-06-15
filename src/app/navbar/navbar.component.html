@@ -3,12 +3,16 @@
 
   <form class="form-inline">
     <div class="input-group">
-      <input class="form-control" type="text" placeholder="Cerca utenti..." aria-label="cerca" aria-describedby="bottone_ricerca">
+    <input class="form-control" type="text" placeholder="Cerca utenti..." [(ngModel)]="ricercaUtente" name="ricerca">
       <div class="input-group-append">
-      <button id="bottone_ricerca" class=" btn btn-outline-primary"><span class="oi oi-magnifying-glass"></span></button>
+        <div *ngIf="ricercaUtente === ''" class="btn btn-outline-primary disabled"><span class="oi oi-magnifying-glass"></span></div>
+        <a *ngIf="ricercaUtente !== ''" class="btn btn-outline-primary" href="/ricerca/{{nome}}/{{cognome}}" (click)="cercaUtente()">
+          <span class="oi oi-magnifying-glass"></span>
+        </a>
       </div>
     </div>
   </form>
+
   <div class="collapse navbar-collapse" id="navbarsExample02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -32,15 +36,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"
            id="dropdownMenu"
-           data-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
+           data-toggle="dropdown">
+<!--           aria-haspopup="true"-->
+<!--           aria-expanded="false">-->
           <span class="oi oi-person"></span> Account
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-          <a class="dropdown-item" routerLink="diario">Mio diario</a>
-          <a class="dropdown-item" routerLink="diario">Impostazioni</a>
-          <a class="dropdown-item" routerLink="login" (click)="logout()">Logout</a>
+          <a class="dropdown-item" routerLink="/diario">Mio diario</a>
+          <a class="dropdown-item" routerLink="/diario">Impostazioni</a>
+          <a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a>
         </div>
       </li>
     </ul>

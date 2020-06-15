@@ -1,0 +1,24 @@
+<div class="columns is-gapless is-multiline is-mobile">
+  <div class="column is-one-fifth"></div>
+
+  <div class="column">
+    <div *ngFor="let utente of utenti">
+      <div class="card m-3">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <!--        <div class="mr-2">-->
+            <!--          <img class="rounded-circle" width="45" src="src/assets/images/120px-User_icon_2.svg.png" alt="">-->
+            <!--        </div>-->
+            <div class="ml-2">
+              <div class="h5 m-0"><a>{{utente.nome+" "+utente.cognome}}</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="column is-one-fifth"></div>
+
+</div>

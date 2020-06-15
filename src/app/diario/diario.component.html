@@ -28,14 +28,15 @@
 </div>
 
 <div class="column">
-  <nav id="infoBar" class="is-info rounded" style="margin: 0px 10px 10px 10px">
+
+
+  <nav id="infoBar" class="is-info">
     <div class="navbar-end">
       <div class="nav-item">
-        <button class="button is-info is-light" style=" border-radius: 20px" routerLink="amici">Amici</button>
+        <button class="button is-info is-light" routerLink="/amici">Amici</button>
       </div>
     </div>
   </nav>
-
   <app-crea-post></app-crea-post>
   <br>
   <div *ngFor="let p of posts">

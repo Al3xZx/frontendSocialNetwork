@@ -12,6 +12,8 @@ import { PostComponent } from './post/post.component';
 import { CommentoComponent } from './commento/commento.component';
 import { RichiestaComponent } from './richiesta/richiesta.component';
 import { DiarioComponent } from './diario/diario.component';
+import { AmiciComponent } from './amici/amici.component';
+import { RicercaUtentiComponent } from './ricerca-utenti/ricerca-utenti.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { DiarioComponent } from './diario/diario.component';
     PostComponent,
     CommentoComponent,
     RichiestaComponent,
-    DiarioComponent
+    DiarioComponent,
+    AmiciComponent,
+    RicercaUtentiComponent
   ],
     imports: [
         BrowserModule,

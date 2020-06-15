@@ -1,4 +1,14 @@
 #infoBar{
+  margin: 0px 10px 10px 10px;
   background-color: dodgerblue;
+  border-radius: 15px;
   padding: 8px;
+}
+
+.card{
+  border-radius: 0px 0px 25px 25px;
+}
+
+.button{
+  border-radius: 20px
 }
