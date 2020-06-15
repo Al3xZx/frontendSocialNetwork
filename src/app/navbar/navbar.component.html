@@ -1,50 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-  <a class="navbar-brand" href="#">SocialNetwork</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand font-weight-bold" routerLink="home">SocialNetwork</a>
 
-  <form class="form-inline my-2 my-md-0">
-    <div class="container">
-      <input class="form-control" type="text" placeholder="Cerca utenti..." aria-label="cerca">
-      &nbsp;
-      <button class="btn-primary rounded"><span class="oi oi-magnifying-glass"></span></button>
-<!--      <button class="btn-primary" (click)="ricerca()"><span class="oi oi-magnifying-glass"></span></button>-->
+  <form class="form-inline">
+    <div class="input-group">
+      <input class="form-control" type="text" placeholder="Cerca utenti..." aria-label="cerca" aria-describedby="bottone_ricerca">
+      <div class="input-group-append">
+      <button id="bottone_ricerca" class=" btn btn-outline-primary"><span class="oi oi-magnifying-glass"></span></button>
+      </div>
     </div>
-
   </form>
-
-  <button class="navbar-toggler"
-          type="button" data-toggle="collapse"
-          data-target="#navbar"
-          aria-controls="navbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-
-  <div class="collapse navbar-collapse" id="navbar">
+  <div class="collapse navbar-collapse" id="navbarsExample02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><span class="oi oi-home"></span>Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> <span class="oi oi-people"></span> Richieste</a>
+        <a class="nav-link" routerLink="home"><span class="oi oi-home" aria-hidden="true"></span>Home</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"
-           href="#" id="dropdown09"
+           id="richieste"
+           data-toggle="dropdown">
+<!--           aria-haspopup="true"-->
+<!--           aria-expanded="false">-->
+          <span class="oi oi-people"></span> Richieste
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="richieste">
+          <div class="dropdown-item p-2"><app-richiesta></app-richiesta></div>
+          <div class="dropdown-item p-2"><app-richiesta></app-richiesta></div>
+        </div>
+
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"
+           id="dropdownMenu"
            data-toggle="dropdown"
            aria-haspopup="true"
            aria-expanded="false">
           <span class="oi oi-person"></span> Account
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdown09">
-          <a class="dropdown-item" href="#">Mio diario</a>
-          <a class="dropdown-item" href="#">Impostazioni</a>
-          <a class="dropdown-item" href="#">Logout</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+          <a class="dropdown-item" routerLink="diario">Mio diario</a>
+          <a class="dropdown-item" routerLink="diario">Impostazioni</a>
+          <a class="dropdown-item" routerLink="login" (click)="logout()">Logout</a>
         </div>
       </li>
     </ul>
-
   </div>
 </nav>

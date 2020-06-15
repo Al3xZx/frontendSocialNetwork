@@ -1,0 +1,52 @@
+<div class="card rounded">
+  <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+<!--        <div class="mr-2">-->
+<!--          <img class="rounded-circle" width="45" src="src/assets/images/120px-User_icon_2.svg.png" alt="">-->
+<!--        </div>-->
+        <div class="ml-2">
+          <div class="h5 m-0"><a>{{nomeUtente}}</a></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="card-body">
+    <div class="text-muted h7 mb-2">
+      <i class="fa fa-clock-o"></i>
+      {{post.dataCreazione | date}} at {{post.dataCreazione.getHours()}}:{{post.dataCreazione.getMinutes()}}:{{post.dataCreazione.getSeconds()}}
+    </div>
+    <p style="font-size: 24px" class="card-text text-body">{{post.testo}}</p>
+  </div>
+
+  <div class="card-footer">
+    <button class="button is-light mr-2" (click)="addLike()">
+      <div class="fa fa-gittip mr-2"></div>
+      Like {{numLike}}
+    </button>
+  </div>
+
+  <!--commenti-->
+  <div id="commento" class="card-footer" *ngFor="let c of post.commenti">
+      <app-commento [commento]="c"></app-commento>
+  </div>
+  <!--///////commenti-->
+
+  <div class="card-footer">
+    <div  id="scrivi-commento">
+      <textarea class="textarea"  rows="1" placeholder="Scrivi un commento..." [(ngModel)]="testoNuovoCommento"></textarea>
+
+      <button class="button is-light mt-2 is-disabled" *ngIf="testoNuovoCommento === ''">
+      <div class="fa fa-comment mr-2"></div>
+      Commenta
+      </button>
+
+      <button class="button is-light mt-2" *ngIf="testoNuovoCommento !== ''" (click)="addCommento()">
+        <div class="fa fa-comment mr-2"></div>
+        Commenta
+      </button>
+    </div>
+  </div>
+
+</div>
+
+

@@ -2,15 +2,34 @@
   margin-bottom: 20px;
 }
 .navbar-nav{
-  position: fixed;
   right: 100px;
+  margin-left: auto;
+  /*margin-right: 100px;*/
+}
+.navbar-brand{
+  font-size: x-large;
+  color: dodgerblue;
 }
 
 .form-control{
   width: 500px;
+  margin-right: 1px;
 }
 
 .form-inline{
-  position: center;
+  margin-left: 150px;
+  margin-right: auto;
+}
+
+.btn-primary{
+  height: 38px;
+}
+
+.oi-home,.oi-person,.oi-people{
+  color: dodgerblue;
+}
+
+.dropdown{
+  z-index: 999999;
 }
 

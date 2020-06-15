@@ -1,0 +1,45 @@
+<div class="columns is-gapless is-multiline is-mobile pr-6">
+
+<div class="column is-one-third">
+
+  <div class="card ml-4 mr-2">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{utente.nome+" "+utente.cognome}}</p>
+        </div>
+      </div>
+
+      <div class="content">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="column">
+  <nav id="infoBar" class="is-info rounded" style="margin: 0px 10px 10px 10px">
+    <div class="navbar-end">
+      <div class="nav-item">
+        <button class="button is-info is-light" style=" border-radius: 20px" routerLink="amici">Amici</button>
+      </div>
+    </div>
+  </nav>
+
+  <app-crea-post></app-crea-post>
+  <br>
+  <div *ngFor="let p of posts">
+    <app-post [post]="p"></app-post>
+  </div>
+</div>
+</div>
