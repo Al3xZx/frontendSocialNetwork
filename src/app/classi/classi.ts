@@ -30,24 +30,26 @@ export class AreaGeografica{
 }
 
 export class Post{
-  constructor(
-    public id: number,
-    public dataCreazione: Date,
-    public testo: string,
-    public utente: Utente,
-    public commenti: Commento[],
-    public likes: Like[]
-  ) {}
+  public id: number;
+  public dataCreazione: Date;
+  public testo: string;
+  public utente: Utente;
+  public commenti: Commento[];
+  public likes: Like[];
+  constructor(testo: string) {
+    this.testo = testo;
+  }
 }
 
 export class Commento{
-  constructor(
-    public id: number,
-    public dataCreazione: Date,
-    public testo: string,
-    public post: Post,
-    public utente: Utente
-  ) {}
+  public id: number;
+  public dataCreazione: Date;
+  public testo: string;
+  public post: Post;
+  public utente: Utente;
+  constructor(testo: string) {
+    this.testo = testo;
+  }
 }
 
 export class Like {
@@ -57,4 +59,18 @@ export class Like {
     public post: Post,
     public utente: Utente
   ) {}
+}
+
+export class AccountUtente{
+  constructor(
+    public username: string,
+    public password: string,
+  ) {}
+}
+
+export class Messaggio{
+  public msg: string
+  constructor(msg: string) {
+    this.msg = msg;
+  }
 }

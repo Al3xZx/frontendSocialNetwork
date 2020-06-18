@@ -1,4 +1,6 @@
-<div class="columns is-gapless is-multiline is-mobile pr-6">
+<app-msg-err [msg]="errMsgUtenteNonTrovato" *ngIf="errMsgUtenteNonTrovato"></app-msg-err>
+
+<div class="columns is-gapless is-multiline is-mobile pr-6" *ngIf="!errMsgUtenteNonTrovato">
 
 <div class="column is-one-third">
 
@@ -16,7 +18,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">{{utente.nome+" "+utente.cognome}}</p>
+          <p class="title is-4">{{nome}} {{cognome}}</p>
         </div>
       </div>
 
@@ -33,14 +35,26 @@
   <nav id="infoBar" class="is-info">
     <div class="navbar-end">
       <div class="nav-item">
-        <button class="button is-info is-light" routerLink="/amici">Amici</button>
+        <button class="button is-info is-light mr-2" routerLink="/amici">Amici</button>
+        <button class="button is-info is-light" (click)="inviaRichiesta()" *ngIf="account.loggedUser()!== idUtenteDiario && !amiciConUtenteLoggato">invia richiesta di amicizia</button>
+        <button class="button is-info is-light" *ngIf="account.loggedUser()!== idUtenteDiario && amiciConUtenteLoggato">Amico</button>
+        <app-msg-err [msg]="errMsgRichiesta" *ngIf="errMsgRichiesta"></app-msg-err>
       </div>
     </div>
   </nav>
-  <app-crea-post></app-crea-post>
+  <app-crea-post *ngIf="account.loggedUser() === idUtenteDiario" [posts]="posts"></app-crea-post>
   <br>
   <div *ngFor="let p of posts">
     <app-post [post]="p"></app-post>
   </div>
+  <div *ngIf="!disabilitaContinua" class="container" style="padding-left: 40%">
+    <button class="button is-info is-rounded  mt-4 mb-2" (click)="altriPost()" >
+      <span class="oi oi-arrow-bottom mr-2"></span>Continua<span class="oi oi-arrow-bottom ml-2"></span>
+    </button>
+  </div>
+  <div class="alert alert-info text-center" *ngIf="msgContinua">
+    {{msgContinua}}
+  </div>
+
 </div>
 </div>

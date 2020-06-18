@@ -1,21 +1,20 @@
 
 <div class="columns is-gapless is-multiline is-mobile">
-<div class="column is-one-fifth">
+<div class="column is-one-fifth"></div>
 
-</div>
-
-<div class="column">
-  <app-crea-post></app-crea-post>
-  <br>
-  <br>
-  <div *ngFor="let p of posts">
-    <app-post [post]="p"></app-post>
+  <div class="column">
+    <app-crea-post></app-crea-post>
     <br>
+    <br>
+
+    <app-msg-err [msg]="errMsg" *ngIf="errMsg"></app-msg-err>
+
+    <div *ngFor="let p of posts">
+      <app-post [post]="p"></app-post>
+      <br>
+    </div>
   </div>
-</div>
 
-<div class="column is-one-fifth">
+<div class="column is-one-fifth"></div>
 
-
-</div>
 </div>

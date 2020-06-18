@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PostDataService} from '../services/data/post-data.service';
-import {Commento, Like, Post} from '../classi/classi';
+import {Commento, Like, Post, Utente} from '../classi/classi';
 import {HomeComponent} from '../home/home.component';
 
 @Component({
@@ -10,18 +10,31 @@ import {HomeComponent} from '../home/home.component';
 })
 export class CreaPostComponent implements OnInit {
 
+
+  @Input() posts: Post[]
   testo = '';
+
+
+  errMsg: string;
+  sucMsg: string;
 
   constructor(private postServ: PostDataService) { }
 
   ngOnInit(): void {
+
   }
 
   creaPost(){
-    var p: Post;
-    p = new Post(null, new Date(), this.testo, null, null, null);
-    console.log(p)
-    this.postServ.aggiungiPost(p)
+     this.postServ.aggiungiPost(new Post(this.testo)).subscribe(
+      response => {
+        this.sucMsg = "post pubblicato correttamente!";
+        if(this.posts != null) this.posts.splice(0,0,response);
+
+      },
+      err =>{
+        this.errMsg = "errore nella pubblicazione del post!";
+      }
+    )
     this.testo = '';
   }
 

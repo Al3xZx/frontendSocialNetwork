@@ -1,6 +1,6 @@
 import {ApplicationRef, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RicercaUtentiComponent} from '../ricerca-utenti/ricerca-utenti.component';
+import {AccountingService} from '../services/data/accounting.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   ricercaUtente = '';
   nome = '';
   cognome = '';
-  constructor(private router: Router) { }
+  constructor(private router: Router, public autenticazione: AccountingService) { }
 
   ngOnInit(): void {
     this.url = this.router.url;
@@ -21,8 +21,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    this.autenticazione.logoutUser();
     console.log("logout eseguito");
     console.log(this.url);
+    this.router.navigate(["/login"])
   }
 
   cercaUtente() {

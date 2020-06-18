@@ -1,0 +1,26 @@
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.error-actions {
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.error-actions .btn {
+  margin-right:8px;
+}
+
+#home_button{
+  font-size: 15px;
+  padding: 3px;
+  width: 60px;
+  height: 30px;
+}
+
+h1{
+  font-size: 45px;
+}
+
+h2{
+  font-size: 35px;
+}

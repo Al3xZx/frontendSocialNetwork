@@ -14,6 +14,12 @@ import { RichiestaComponent } from './richiesta/richiesta.component';
 import { DiarioComponent } from './diario/diario.component';
 import { AmiciComponent } from './amici/amici.component';
 import { RicercaUtentiComponent } from './ricerca-utenti/ricerca-utenti.component';
+import { LoginComponent } from './login/login.component';
+import { ErrorComponent } from './error/error.component';
+import { RegistrazioneComponent } from './registrazione/registrazione.component';
+import {HttpClientModule} from '@angular/common/http';
+import { MsgSucComponent } from './msg-suc/msg-suc.component';
+import { MsgErrComponent } from './msg-err/msg-err.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +33,18 @@ import { RicercaUtentiComponent } from './ricerca-utenti/ricerca-utenti.componen
     RichiestaComponent,
     DiarioComponent,
     AmiciComponent,
-    RicercaUtentiComponent
+    RicercaUtentiComponent,
+    LoginComponent,
+    ErrorComponent,
+    RegistrazioneComponent,
+    MsgSucComponent,
+    MsgErrComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
