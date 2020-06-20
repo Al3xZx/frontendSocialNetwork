@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Utente} from '../classi/classi';
+import {ActivatedRoute} from '@angular/router';
+import {UtenteDataService} from '../services/data/utente-data.service';
 
 @Component({
   selector: 'app-amici',
@@ -8,18 +10,20 @@ import {Utente} from '../classi/classi';
 })
 export class AmiciComponent implements OnInit {
 
-  utente: Utente
-  constructor() { }
+  idUtenteDiario: number
+  listaAmici: Utente[];
+  constructor(
+    private route: ActivatedRoute,
+    private utenteDataService: UtenteDataService
+  ) { }
 
   ngOnInit(): void {
-    this.utente = new Utente(null, "Ale", "Moli");
-    this.utente.amici = [
-      new Utente(null,"Nome", "Utente"),
-      new Utente(null,"Nome", "Utente"),
-      new Utente(null,"Nome", "Utente"),
-      new Utente(null,"Nome", "Utente"),
-      new Utente(null,"Nome", "Utente"),
-    ];
+    this.idUtenteDiario = Number(this.route.snapshot.paramMap.get('userId'));
+    this.utenteDataService.listaAmici(this.idUtenteDiario).subscribe(
+      response =>{
+        this.listaAmici = response;
+      }
+    )
   }
 
 }

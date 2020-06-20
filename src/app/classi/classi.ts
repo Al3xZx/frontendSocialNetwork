@@ -12,21 +12,25 @@ export class Utente {
   public posts: Post[];
   public likes: Like[];
 
-  constructor(id: number, nome: string, cognome: string,) {
-    this.id = id;
+  constructor(nome: string, cognome: string, email: string, genere: boolean) {
     this.nome = nome;
     this.cognome = cognome;
+    this.email = email;
+    this.genere = genere;
   }
 }
 
 export class AreaGeografica{
-  constructor(
-    public id: number,
-    public nazione: string,
-    public regione: string,
-    public citta: string,
-    public residenti: Utente[]
-  ) {}
+  public id: number;
+  public nazione: string;
+  public regione: string;
+  public citta: string;
+  public residenti: Utente[];
+  constructor(nazione: string, regione: string, citta: string) {
+    this.nazione=nazione;
+    this.regione=regione;
+    this.citta=citta;
+  }
 }
 
 export class Post{

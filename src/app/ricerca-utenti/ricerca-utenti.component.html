@@ -2,6 +2,19 @@
   <div class="column is-one-fifth"></div>
 
   <div class="column">
+
+    <form class="form-inline mb-4">
+      <div class="input-group">
+        <input class="form-control" type="text" placeholder="Cerca utenti..." [(ngModel)]="utenteDaRicercare" name="ricerca">
+        <div class="input-group-append">
+          <div *ngIf="utenteDaRicercare === ''" class="btn btn-outline-primary disabled"><span class="oi oi-magnifying-glass"></span></div>
+          <a *ngIf="utenteDaRicercare !== ''" class="btn btn-outline-primary"  (click)="cercaUtente()">
+            <span class="oi oi-magnifying-glass"></span>
+          </a>
+        </div>
+      </div>
+    </form>
+
     <div *ngFor="let utente of utenti">
       <div class="card m-3">
         <div class="card-header">
@@ -10,13 +23,22 @@
             <!--          <img class="rounded-circle" width="45" src="src/assets/images/120px-User_icon_2.svg.png" alt="">-->
             <!--        </div>-->
             <div class="ml-2">
-              <div class="h5 m-0"><a>{{utente.nome+" "+utente.cognome}}</a></div>
+              <div class="h5 m-0"><a href="/diario/{{utente.id}}">{{utente.nome+" "+utente.cognome}}</a></div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+
+    <div *ngIf="!disabilitaContinua && utenti != null && utenti.length >= numInPage" class="container" style="padding-left: 40%">
+      <button class="button is-info is-rounded  mt-4 mb-2" (click)="altriRisultati()" >
+        <span class="oi oi-arrow-bottom mr-2"></span>Continua<span class="oi oi-arrow-bottom ml-2"></span>
+      </button>
+    </div>
+    <div class="alert alert-info text-center" *ngIf="msgContinua">
+      {{msgContinua}}
+    </div>
+
   </div>
 
   <div class="column is-one-fifth"></div>

@@ -10,8 +10,17 @@
     <app-msg-err [msg]="errMsg" *ngIf="errMsg"></app-msg-err>
 
     <div *ngFor="let p of posts">
-      <app-post [post]="p"></app-post>
+      <app-post [post]="p" [listaPost]="posts"></app-post>
       <br>
+    </div>
+
+    <div *ngIf="!disabilitaContinua && posts != null && posts.length >= numInPage" class="container" style="padding-left: 40%">
+      <button class="button is-info is-rounded  mt-4 mb-2" (click)="altriPost()" >
+        <span class="oi oi-arrow-bottom mr-2"></span>Continua<span class="oi oi-arrow-bottom ml-2"></span>
+      </button>
+    </div>
+    <div class="alert alert-info text-center" *ngIf="msgContinua">
+      {{msgContinua}}
     </div>
   </div>
 

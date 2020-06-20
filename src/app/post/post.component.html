@@ -5,8 +5,14 @@
 <!--          <img class="rounded-circle" width="45" src="src/assets/images/120px-User_icon_2.svg.png" alt="">-->
 <!--        </div>-->
         <div class="ml-2">
-          <div class="h5 m-0"><a>{{utente.nome+" "+utente.cognome}}</a></div>
+          <div class="h5 m-0"><a href="/diario/{{utente.id}}">{{utente.nome+" "+utente.cognome}}</a></div>
         </div>
+
+        <div *ngIf="post.utente.id === account.loggedUser()">
+          <button id="bottoneElimina" class="btn btn-danger ml-3" (click)="eliminaPost()">Elimina</button>
+          <app-msg-err [msg]="msgErrDel" *ngIf="msgErrDel"></app-msg-err>
+        </div>
+
       </div>
   </div>
 
@@ -18,8 +24,8 @@
     <p style="font-size: 24px" class="card-text text-body">{{post.testo}}</p>
   </div>
 
-  <div class="card-footer d-flex justify-content-between align-items-cente">
-    <button class="btn btn-light mt-2" (click)="addLike()">
+  <div class="card-footer d-flex justify-content-between align-items-center">
+    <button class="like btn btn-light mt-2" (click)="addLike()">
       <div class="fa fa-gittip mr-2"></div>
       Like {{numLike}}
     </button>
@@ -29,7 +35,7 @@
 
   <!--commenti-->
   <div id="commento" class="card-footer" *ngFor="let c of post.commenti">
-      <app-commento [commento]="c"></app-commento>
+      <app-commento [commento]="c" [listaCommento]="post.commenti"></app-commento>
   </div>
   <!--///////commenti-->
 
@@ -37,12 +43,12 @@
     <div  id="scrivi-commento">
       <textarea class="textarea"  rows="1" placeholder="Scrivi un commento..." [(ngModel)]="testoNuovoCommento"></textarea>
 
-      <div class="btn btn-light mt-2 disabled" *ngIf="testoNuovoCommento === ''">
+      <div class="commenta btn btn-light mt-2 disabled" *ngIf="testoNuovoCommento === ''">
       <div class="fa fa-comment mr-2"></div>
       Commenta
       </div>
 
-      <button class="btn btn-light mt-2" *ngIf="testoNuovoCommento !== ''" (click)="addCommento()">
+      <button class="commenta btn btn-light mt-2" *ngIf="testoNuovoCommento !== ''" (click)="addCommento()">
         <div class="fa fa-comment mr-2"></div>
         Commenta
       </button>

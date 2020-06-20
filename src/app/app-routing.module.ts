@@ -17,10 +17,8 @@ const routes: Routes = [
   {path: 'registrazione', component: RegistrazioneComponent},
   {path: 'home', component: HomeComponent, canActivate: [RoutGuardService]},
   {path: 'diario/:userId', component: DiarioComponent, canActivate: [RoutGuardService]},
-  {path: 'amici', component: AmiciComponent, canActivate: [RoutGuardService]},
+  {path: 'amici/:userId', component: AmiciComponent, canActivate: [RoutGuardService]},
   {path: 'ricerca', component: RicercaUtentiComponent, canActivate: [RoutGuardService]},
-  {path: 'ricerca/:nome/:cognome', component: RicercaUtentiComponent, canActivate: [RoutGuardService]},
-  {path: 'ricerca/:nome', component: RicercaUtentiComponent, canActivate: [RoutGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 

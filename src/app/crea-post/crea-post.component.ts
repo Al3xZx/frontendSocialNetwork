@@ -29,10 +29,12 @@ export class CreaPostComponent implements OnInit {
       response => {
         this.sucMsg = "post pubblicato correttamente!";
         if(this.posts != null) this.posts.splice(0,0,response);
+        setTimeout( ()=>{this.sucMsg = '' }, 2500);
 
       },
       err =>{
         this.errMsg = "errore nella pubblicazione del post!";
+        setTimeout( ()=>{this.errMsg = '' }, 2500);
       }
     )
     this.testo = '';

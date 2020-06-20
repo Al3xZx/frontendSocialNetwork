@@ -3,7 +3,7 @@
   border-radius: 15px;
 }
 
-.btn{
+.like, .commenta{
   border-radius: 20px;
   color: dodgerblue;
   background-color: #F1F1F1;
@@ -20,4 +20,11 @@
 }
 .textarea{
   border-radius: 10px;
+}
+
+#bottoneElimina{
+  border-radius: 20px;
+  width:65px;
+  height:25px;
+  padding: 1px;
 }

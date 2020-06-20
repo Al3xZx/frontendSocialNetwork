@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Commento, Like, Post, Utente} from '../../classi/classi';
+import {Commento, Like, Messaggio, Post, Utente} from '../../classi/classi';
 import {AccountingService} from './accounting.service';
 import {HttpClient} from '@angular/common/http';
 
@@ -29,42 +29,22 @@ export class PostDataService {
   }
 
   aggiungiPost(post: Post){
-    // if(this.post == null){
-    //   p.id = 0;
-    //   this.post = [p];
-    // }else{
-    //   p.id = this.post.length;
-    //   this.post.push(p);
-    // }
-    // console.log(this.post)
     return this.httpClient.post<Post>(`http://${this.server}:${this.port}/post/add/${this.account.loggedUser()}`, post); //ALT+0096 => `
   }
 
   aggiungiCommento(idPost: number, commento: Commento){
-    // for(let p of this.post){
-    //   if (p.id === idPost) {
-    //     if(p.commenti == null)
-    //       p.commenti = [commento];
-    //     else
-    //       p.commenti.push(commento);
-    //   }
-    // }
     return this.httpClient.post<Commento>(`http://${this.server}:${this.port}/post/${idPost}/add_comment_from/${this.account.loggedUser()}`,commento);
   }
 
   aggiungiLike(idPost: number) {
-    // for (let p of this.post)
-    //   if (p.id === idPost) {
-    //     var l = new Like(null, new Date(), p, null)
-    //       if(p.likes == null)
-    //         p.likes = [l];
-    //       else
-    //         p.likes.push(l);
-    //     }
     return this.httpClient.post<Like>(`http://${this.server}:${this.port}/post/${idPost}/add_like_from/${this.account.loggedUser()}`,null);
   }
 
   eliminaPost(idPost: number){
-    //TODO
+    return this.httpClient.delete<Messaggio>(`http://${this.server}:${this.port}/post/delete/${this.account.loggedUser()}/${idPost}`)
+  }
+
+  eliminaCommento(idCommento: number){
+    return this.httpClient.delete<Messaggio>(`http://${this.server}:${this.port}/post/commento/delete/${this.account.loggedUser()}/${idCommento}`)
   }
 }

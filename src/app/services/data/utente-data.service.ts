@@ -21,12 +21,12 @@ export class UtenteDataService {
     return this.httpClient.post<Messaggio>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/send_friend_request/${userIdRicevente}`,null);
   }
 
-  accettaRichiestaAmicizia(userIdRicevente: number){
-    return this.httpClient.post<Messaggio>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/accept_friend_request/${userIdRicevente}`,null);
+  accettaRichiestaAmicizia(userIdRichiedente: number){
+    return this.httpClient.post<Messaggio>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/accept_friend_request/${userIdRichiedente}`,null);
   }
 
-  rifiutaRichiestaAmicizia(userIdRicevente: number){
-    return this.httpClient.post<Messaggio>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/reject_friend_request/${userIdRicevente}`,null);
+  rifiutaRichiestaAmicizia(userIdRichiedente: number){
+    return this.httpClient.post<Messaggio>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/reject_friend_request/${userIdRichiedente}`,null);
   }
 
   //richieste di amicizia fatte all'utente attualmente loggato
@@ -51,5 +51,7 @@ export class UtenteDataService {
   verificaAmicizia(userIdDaVerificare: number){
     return this.httpClient.get<boolean>(`http://${this.server}:${this.port}/user/${this.account.loggedUser()}/verifiva_amicizia/${userIdDaVerificare}`);
   }
+
+
 
 }

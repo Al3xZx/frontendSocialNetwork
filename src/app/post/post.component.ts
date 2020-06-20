@@ -10,6 +10,8 @@ import {AccountingService} from '../services/data/accounting.service';
 })
 export class PostComponent implements OnInit {
 
+  @Input() listaPost: Post[]; //lista nella quale è visualizzato questo post
+
   @Input() post: Post;
 
   testoNuovoCommento = "";
@@ -23,7 +25,13 @@ export class PostComponent implements OnInit {
   errMsgLike: string;
   errMsgCommento: string;
 
-  constructor(private postServ: PostDataService, private account: AccountingService) { }
+  msgSucDel: string;
+  msgErrDel: string;
+
+  constructor(
+    private postServ: PostDataService,
+    public account: AccountingService
+  ) { }
 
   ngOnInit(): void {
     // if(this.post.utente != null)
@@ -47,6 +55,15 @@ export class PostComponent implements OnInit {
   // }
 
   addLike() {
+
+    function contiene(likes: Like[], idUtenteCorrente: number) {
+      for(let like of likes)
+        if(like.utente.id === idUtenteCorrente)
+          return true;
+      return false;
+    }
+
+    if(!contiene(this.likes, this.account.loggedUser())){//per evitare continue richieste: (lato api è comunque protetto dal vincolo unique)
       this.postServ.aggiungiLike(this.post.id).subscribe(
         response => {
           this.likes.push(response);
@@ -57,6 +74,10 @@ export class PostComponent implements OnInit {
         //   this.errMsgLike = err.error.message;
         // }
       )
+    }else{
+      this.errMsgLike = "hai già messo like!";
+      setTimeout( ()=>{this.errMsgLike = '' }, 2500);
+    }
   }
 
   addCommento() {
@@ -67,9 +88,32 @@ export class PostComponent implements OnInit {
     this.postServ.aggiungiCommento(this.post.id, new Commento(this.testoNuovoCommento)).subscribe(
       response =>{
         this.commenti.push(response);
+        this.testoNuovoCommento = '';
       },
       error => {
         this.errMsgCommento = error.error.message;
+        this.testoNuovoCommento = '';
+        setTimeout( ()=>{this.errMsgCommento = '' }, 2500);
+      }
+    )
+  }
+
+  eliminaPost(){
+    this.postServ.eliminaPost(this.post.id).subscribe(
+      response =>{
+        this.msgSucDel = response.msg;
+        // setTimeout( ()=>{this.msgSucDel = null }, 2500);
+        let i = 0;
+        for(let c of this.listaPost){
+          if(c.id === this.post.id) {
+            this.listaPost.splice(i, 1);
+            break;
+          }
+          i++;
+        }
+      },error => {
+        this.msgErrDel = error.error.message;
+        setTimeout( ()=>{this.msgErrDel = null }, 2500);
       }
     )
   }

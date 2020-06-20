@@ -5,8 +5,17 @@
 <!--        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">-->
 <!--      </div>-->
       <div class="ml-2">
-        <div class="h5 m-0"><a>{{nomeUtente}}</a></div>
+        <div class="h5 m-0"><a href="/diario/{{commento.utente.id}}">{{nomeUtente}}</a></div>
       </div>
+
+      <div *ngIf="commento.utente.id === account.loggedUser()">
+        <button id="bottoneElimina" class="btn btn-danger ml-3" (click)="eliminaCommento()">Elimina</button>
+        <app-msg-err [msg]="msgErrDel" *ngIf="msgErrDel"></app-msg-err>
+<!--        <app-msg-suc [msg]="msgSucDel" *ngIf="msgSucDel"></app-msg-suc>-->
+      </div>
+
+
+
     </div>
 
     <div class="text-muted h7 mb-2">

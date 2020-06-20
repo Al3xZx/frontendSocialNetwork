@@ -11,21 +11,13 @@
   color: dodgerblue;
 }
 
-.form-control{
-  width: 500px;
-  margin-right: 1px;
-}
 
-.form-inline{
-  margin-left: 150px;
-  margin-right: auto;
-}
 
 .btn-primary{
   height: 38px;
 }
 
-.oi-home,.oi-person,.oi-people{
+.oi-home,.oi-person,.oi-people, .oi-magnifying-glass{
   color: dodgerblue;
 }
 

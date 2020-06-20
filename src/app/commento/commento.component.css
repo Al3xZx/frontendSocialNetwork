@@ -3,5 +3,11 @@
   padding: 5px;
   border: 2px solid lightgray;
   width: 550px;
+}
 
+#bottoneElimina{
+  border-radius: 20px;
+  width:65px;
+  height:25px;
+  padding: 1px;
 }

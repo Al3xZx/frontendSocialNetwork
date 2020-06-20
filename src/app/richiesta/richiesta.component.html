@@ -1,6 +1,6 @@
 <div id="richiesta" >
   <div style="font-size: 18px" class="d-flex justify-content-between align-items-center">
-    <a>{{utenteRichiedente.nome+" "+utenteRichiedente.cognome}}</a>
+    <a href="/diario/{{utenteRichiedente.id}}">{{utenteRichiedente.nome+" "+utenteRichiedente.cognome}}</a>
   </div>
   <div>
     <button class="button is-danger mr-2" (click)="rifiutaRichiesta()">Rifiuta</button>

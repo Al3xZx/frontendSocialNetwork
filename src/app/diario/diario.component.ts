@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Post, Utente} from '../classi/classi';
+import {AreaGeografica, Post, Utente} from '../classi/classi';
 import {ActivatedRoute} from '@angular/router';
 import {PostDataService} from '../services/data/post-data.service';
 import {AccountingService} from '../services/data/accounting.service';
@@ -11,19 +11,10 @@ import {UtenteDataService} from '../services/data/utente-data.service';
   styleUrls: ['./diario.component.css']
 })
 export class DiarioComponent implements OnInit {
-  // posts= [
-  //   new Post(0, new Date(), "jhsfdbdsfkdhfkhskfhdskf", new Utente(null,"Ale","Mol"), null, null),
-  //   new Post(2, new Date(), "jhsfdbdsfkdhfkhskfhdskf", new Utente(null,"Ale","Mol"), null, null),
-  //   new Post(1, new Date(), "jhsfdbdsfkdhfkhskfhdskf", new Utente(null,"Ale","Mol"), null, null),
-  //   new Post(3, new Date(), "jhsfdbdsfkdhfkhskfhdskf", new Utente(null,"Ale","Mol"), null, null),
-  // ];
 
   posts: Post[];
   pagePost = 1;
-
-
-
-  errMsg: string;
+  numInPage = 15;
 
   datiUtente: Utente;//contine solo i dati e l'area geografica, non post, amici, like ecc
   nome = '';
@@ -32,33 +23,49 @@ export class DiarioComponent implements OnInit {
   idUtenteDiario: number;
   amiciConUtenteLoggato = false;
 
+  msgRichiesta: string;
   errMsgRichiesta: string;
   errMsgUtenteNonTrovato: string;
+
   disabilitaContinua = false;
   msgContinua: string;
+
+  viewAddArea = false;
+  nazione: string;
+  regione: string;
+  citta: string;
+  errMsgAddArea: string;
+  succMsgAddArea: string;
 
   constructor(
     private route: ActivatedRoute,
     private postService: PostDataService,
     public account: AccountingService,
-    private utenteService: UtenteDataService) { }
+    private utenteService: UtenteDataService) {
+  }
 
   ngOnInit(): void {
     this.idUtenteDiario = Number(this.route.snapshot.paramMap.get('userId'));
     this.prelevaDatiUtente();//
     this.verificaAmicizia();
     this.prelevaPost()
-
   }
 
 
-
-  inviaRichiesta(){
-
+  inviaRichiesta() {
+    this.utenteService.inviaRichiestaAmicizia(this.idUtenteDiario).subscribe(
+      response => {
+        this.msgRichiesta = response.msg;
+        setTimeout(() => {this.msgRichiesta = ''}, 2500);
+      }, error => {
+        this.errMsgRichiesta = error.error.message;
+        setTimeout(() => {this.errMsgRichiesta = ''}, 3500);
+      }
+    )
   }
 
-  verificaAmicizia(){
-    if(this.idUtenteDiario !== this.account.loggedUser()) {
+  verificaAmicizia() {
+    if (this.idUtenteDiario !== this.account.loggedUser()) {
       this.utenteService.verificaAmicizia(this.idUtenteDiario).subscribe(
         response => {
           this.amiciConUtenteLoggato = response;
@@ -67,9 +74,9 @@ export class DiarioComponent implements OnInit {
     }
   }
 
-  prelevaDatiUtente(){
+  prelevaDatiUtente() {
     this.utenteService.getDatiUtente(this.idUtenteDiario).subscribe(
-      response =>{
+      response => {
         this.datiUtente = response;
         this.nome = this.datiUtente.nome;
         this.cognome = this.datiUtente.cognome;
@@ -81,8 +88,8 @@ export class DiarioComponent implements OnInit {
     )
   }
 
-  prelevaPost(){
-    this.postService.listaPostUtente(this.idUtenteDiario,this.pagePost,15).subscribe(
+  prelevaPost() {
+    this.postService.listaPostUtente(this.idUtenteDiario, this.pagePost, this.numInPage).subscribe(
       response => {
         this.posts = response;
       }
@@ -92,16 +99,40 @@ export class DiarioComponent implements OnInit {
 
   altriPost() {
     this.pagePost++;
-    console.log("altri post pag"+this.pagePost)
-    this.postService.listaPostUtente(this.idUtenteDiario,this.pagePost,15).subscribe(
+    //console.log("altri post pag "+this.pagePost)
+    this.postService.listaPostUtente(this.idUtenteDiario, this.pagePost, this.numInPage).subscribe(
       response => {
-        if(response.length === 0) {
+        if (response.length === 0) {
           this.disabilitaContinua = true;
           this.msgContinua = "non ci sono altri post!"
         }
-        for(let p of response)
+        for (let p of response)
           this.posts.push(p);
       }
     )
+  }
+
+  viewAggiungiArea() {
+    this.viewAddArea = true;
+  }
+
+  aggiungiArea() {
+    if (this.nazione || this.regione || this.citta) {
+      var areaGeografica = new AreaGeografica(
+        this.nazione != null ? this.nazione.charAt(0).toUpperCase() + this.nazione.slice(1).toLowerCase() : null,
+        this.regione != null ? this.regione.charAt(0).toUpperCase() + this.regione.slice(1).toLowerCase() : null,
+        this.citta != null ? this.citta.charAt(0).toUpperCase() + this.citta.slice(1).toLowerCase() : null
+      );
+    }
+    this.account.aggiungiAreaGeografica(areaGeografica).subscribe(
+      response =>{
+        this.succMsgAddArea = "area aggiunta/modificata";
+        setTimeout(() => {this.succMsgAddArea = '', window.location.reload()}, 1500);
+      },error => {
+        this.errMsgAddArea = error.error.message;
+        setTimeout(() => {this.errMsgAddArea = ''}, 3500);
+      }
+    )
+
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {Utente} from '../classi/classi';
-import {ActivatedRoute} from '@angular/router';
+import {UtenteDataService} from '../services/data/utente-data.service';
 
 @Component({
   selector: 'app-ricerca-utenti',
@@ -9,21 +9,49 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RicercaUtentiComponent implements OnInit {
 
-  utenti: Utente[];
-  // nome =this.route.snapshot.paramMap.get('nome');
-  // cognome = this.route.snapshot.paramMap.get('cognome');
-  // utenti = [new Utente(null, this.nome, this.cognome)];
+  page = 1;
+  numInPage = 25;
+  disabilitaContinua = false;
+  msgContinua: string;
 
-  constructor(private route: ActivatedRoute) { }
+  utenti: Utente[];
+  private nome: string;
+  private cognome: string;
+  utenteDaRicercare = '';
+
+  constructor(private utenteDataService: UtenteDataService) { }
 
   ngOnInit(): void {
-    const nome =this.route.snapshot.paramMap.get('nome');
-    const cognome = this.route.snapshot.paramMap.get('cognome');
-    this.utenti = [new Utente(null, nome, cognome)];
   }
 
-  ricerca(){
+  public cercaUtente(){
+    let split = this.utenteDaRicercare.split(" ");
+    this.nome = split[0];
+    if(split[1] != null) {
+      this.cognome = split[1];
+    }else {
+      this.cognome = "";
+    }
+    this.utenteDataService.cercaUtente(this.nome, this.cognome, this.page,this.numInPage).subscribe(
+      response => {
+        this.utenti = response;
+        this.utenteDaRicercare = '';
+      }
+    )
+  }
 
+  altriRisultati(){
+    this.page++;
+    this.utenteDataService.cercaUtente(this.nome, this.cognome, this.page,this.numInPage).subscribe(
+      response => {
+        if(response.length === 0) {
+          this.disabilitaContinua = true;
+          this.msgContinua = "non ci sono altri risultati"
+        }
+        for(let p of response)
+          this.utenti.push(p);
+      }
+    )
   }
 
 }

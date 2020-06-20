@@ -11,8 +11,13 @@ export class HomeComponent implements OnInit {
 
   posts: Post[];
   pagePost: number;
+  numInPage = 50;
 
   errMsg: string;
+
+  disabilitaContinua = false;
+  msgContinua: string;
+
 
   constructor(private postServ: PostDataService) { }
 
@@ -22,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadPostDiAmici(){
-    this.postServ.listaPostDiAmici(this.pagePost, 50).subscribe(
+    this.postServ.listaPostDiAmici(this.pagePost, this.numInPage).subscribe(
       response => {
         this.posts = response;
         if(this.posts.length == 0)
@@ -34,4 +39,18 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  altriPost() {
+    this.pagePost++;
+    //console.log("altri post pag "+this.pagePost)
+    this.postServ.listaPostDiAmici(this.pagePost, this.numInPage).subscribe(
+      response => {
+        if(response.length === 0) {
+          this.disabilitaContinua = true;
+          this.msgContinua = "non ci sono altri post!"
+        }
+        for(let p of response)
+          this.posts.push(p);
+      }
+    )
+  }
 }

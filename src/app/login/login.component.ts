@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         this.utenteLoggato = response;
         sessionStorage.setItem("userId", this.utenteLoggato.id.toString());
         this.router.navigate(["/home"])
+
       },
       error =>{
         this.errMsg = "errore di autenticazione, riprova ad inserire i dati!";
