@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       },
       error =>{
         this.errMsg = "errore di autenticazione, riprova ad inserire i dati!";
+        setTimeout( ()=>{this.errMsg = null }, 2500);
       }
     )
 
