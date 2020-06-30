@@ -20,10 +20,6 @@ export class NavbarComponent implements OnInit {
 
   richiesteAmicizia: Utente[];
 
-  utenteDaRicercare = '';
-  nomeDaRicercare = '';
-  cognomeDaRicercare = '';
-
   constructor(
     private router: Router,
     public autenticazione: AccountingService,
@@ -32,31 +28,16 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.loadInfo) {
-      this.prelevaDatiUtenteCorrente()
+      this.prelevaDatiUtenteCorrente();
       this.prelevaRichieste();
     }
   }
 
   logout() {
     this.autenticazione.logoutUser();
-    console.log("logout eseguito");
+    //console.log("logout eseguito");
     this.router.navigate(["/login"])
   }
-
-  // cercaUtente(nomeEcognome: string) {//TODO
-  //   console.log(nomeEcognome);
-  //   let split = nomeEcognome.split(" ");
-  //   this.nomeDaRicercare = split[0];
-  //   if(split[1] != null) {
-  //     this.cognomeDaRicercare = split[1];
-  //     //this.router.navigate(['ricerca', this.nomeDaRicercare, this.cognomeDaRicercare]);
-  //     this.ricercaUtentiComponent.ricerca(this.nomeDaRicercare, this.cognomeDaRicercare);
-  //   }else {
-  //     this.cognomeDaRicercare = "";
-  //     //this.router.navigate(['ricerca', this.nomeDaRicercare, this.cognomeDaRicercare]);
-  //     this.ricercaUtentiComponent.ricerca(this.nomeDaRicercare, this.cognomeDaRicercare);
-  //   }
-  // }
 
   prelevaDatiUtenteCorrente(){
     this.utenteService.getDatiUtente(this.autenticazione.loggedUser()).subscribe(

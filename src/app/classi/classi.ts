@@ -26,11 +26,13 @@ export class AreaGeografica{
   public regione: string;
   public citta: string;
   public residenti: Utente[];
+
   constructor(nazione: string, regione: string, citta: string) {
     this.nazione=nazione;
     this.regione=regione;
     this.citta=citta;
   }
+
 }
 
 export class Post{
@@ -40,9 +42,11 @@ export class Post{
   public utente: Utente;
   public commenti: Commento[];
   public likes: Like[];
+
   constructor(testo: string) {
     this.testo = testo;
   }
+
 }
 
 export class Commento{
@@ -51,9 +55,11 @@ export class Commento{
   public testo: string;
   public post: Post;
   public utente: Utente;
+
   constructor(testo: string) {
     this.testo = testo;
   }
+
 }
 
 export class Like {

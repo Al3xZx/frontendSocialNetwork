@@ -45,11 +45,11 @@ export class PostComponent implements OnInit {
   }
 
   //Test Like parallelo
-  // addLike(){
+  // addMultipleLikeTester(){
   //   let i = 0;
   //   while (i < 10) {
-  //     this.addLike2(173);
-  //     this.addLike2(172);
+  //     this.addLike(173);
+  //     this.addLike(172);
   //     i++;
   //   }
   // }
@@ -111,6 +111,7 @@ export class PostComponent implements OnInit {
           }
           i++;
         }
+        //window.location.reload();
       },error => {
         this.msgErrDel = error.error.message;
         setTimeout( ()=>{this.msgErrDel = null }, 2500);

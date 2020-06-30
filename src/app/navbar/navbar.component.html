@@ -1,18 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
   <a class="navbar-brand font-weight-bold" routerLink="home">SocialNetwork</a>
 
-<!--  <form class="form-inline" *ngIf="autenticazione.isLogged()">-->
-<!--    <div class="input-group">-->
-<!--    <input class="form-control" type="text" placeholder="Cerca utenti..." [(ngModel)]="utenteDaRicercare" name="ricerca">-->
-<!--      <div class="input-group-append">-->
-<!--        <div *ngIf="utenteDaRicercare === ''" class="btn btn-outline-primary disabled"><span class="oi oi-magnifying-glass"></span></div>-->
-<!--        <a *ngIf="utenteDaRicercare !== ''" class="btn btn-outline-primary"  (click)="cercaUtente(utenteDaRicercare)">-->
-<!--          <span class="oi oi-magnifying-glass"></span>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </form>-->
-
   <div class="collapse navbar-collapse" id="navbar" *ngIf="autenticazione.isLogged()">
     <ul class="navbar-nav">
       <li class="nav-item active">
@@ -45,7 +33,6 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
           <p class = "dropdown-item">{{nome}} {{cognome}}</p>
           <a class="dropdown-item" href="/diario/{{autenticazione.loggedUser()}}">Mio diario</a>
-<!--          <a class="dropdown-item" routerLink="/diario">Impostazioni</a>-->
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </li>
